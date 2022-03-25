@@ -42,9 +42,9 @@ class BooksController extends Controller
         $faker = \Faker\Factory::create(1);
 
         $book = Book::create([
-            'name' => $faker->name,
-            'description' => $faker->sentence,
-            'publication_year' => $faker->year
+            'name' => $request->name,
+            'description' => $request->description,
+            'publication_year' => $request->publication_year
         ]);
 
         return new BooksResource($book);
@@ -100,6 +100,8 @@ class BooksController extends Controller
     {
         $book->delete();
 
-        return response(null, 204);
+        //return response('succesfully deleted', 204);
+        return response()->json(['status' => 'deleted'], 201); 
+        
     }
 }

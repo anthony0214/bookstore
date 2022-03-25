@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\AuthorsController;
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\CurrencyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,15 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/test', function(Request $request){
-//     return 'Authenticated';
-// });
+Route::get('/test', function(Request $request){
+    return 'Authenticated';
+});
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
 
-Route::middleware('auth:api')->prefix('v1')->group(function(){
+Route::middleware('auth:api')->group(function(){
     Route::get('/user', function(Request $request){
         return $request->user();
     });
@@ -38,9 +39,26 @@ Route::middleware('auth:api')->prefix('v1')->group(function(){
 
     Route::apiResource('/books', BooksController::class);
 
+    Route::apiResource('/currency', CurrencyController::class);
+
 });
 
-//author/{author}
-//for one specific author 
+//Route::get('/currency', [CurrencyController::class, 'index']);
+
+
+// Route::group(['middleware' => 'auth:api'], function(){
+//     Route::get('/currency', [CurrencyController::class, 'index']);
+//  });
+
+// Route::middleware('auth:api')->group(function(){
+//     Route::get('/user', function(Request $request){
+//         return $request->user();
+//     });
+//     Route::get('/currency', [CurrencyController::class, 'index']);
+//     //Route::apiResource('/currency', CurrencyController::class);
+//     Route::apiResource('/books', BooksController::class);
+
+// });
+
 
  
